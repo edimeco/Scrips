@@ -1,0 +1,50 @@
+
+NB: Check all the paths, all grid paths have probably to be updated
+
+To run analysis on data or mc from grid:
+
+Data: WholeRun_1st.py, WholeRun_2nd.py, WholeRun_3rd.py (splitted to run in three different ui)
+MC: WholeMCSig.py, WholeMCBkg.py
+
+how to run them: 
+-> source the padme_init_cvmfs_root5.sh and run it like this: (nohup so that you can close the connection)
+    nohup python Whole(whatever_you_want).py & 
+
+For DATA:
+WholeRuns runs on each good run of the scan, you need later to merge the sublists:
+->python MergeList.py (also this could be run in nohup)
+
+
+For Periods: 
+1. change shell and use one that has not to run the Analysis
+2. source the following cvmfs setup for pyroot and pandas    NB: ALL .py USING THE DATABASE AND PANDAS NEEDS POINT 1 AND 2
+-> source /cvmfs/sft.cern.ch/lcg/views/LCG_92python3/x86_64-centos7-gcc7-opt/setup.sh
+3. Run: python3 MergePeriod.py
+
+For Tag and Probe on periods:
+
+1. change shell and use one that has not to run the Analysis
+2. source the following cvmfs setup for pyroot and pandas    NB: ALL .py USING THE DATABASE AND PANDAS NEEDS POINT 1 AND 2
+-> source /cvmfs/sft.cern.ch/lcg/views/LCG_92python3/x86_64-centos7-gcc7-opt/setup.sh
+3. Set if is MC or DATA by changing the code (true or false)
+4. Run: python3 TagAndProbe_periods.py > joblist(Data/MC).txt
+5. Go back to a shell where you can run the analysis, source the padme_init_cvmfs_root5.sh
+6. source path/to/joblist(Data/MC).txt
+
+For integrated plot of Tag and Probe vs Period (NB probabably names of folders are wrong, since I modified ECalSel code):
+1. change shell and use one that has not to run the Analysis
+2. source the following cvmfs setup for pyroot and pandas    NB: ALL .py USING THE DATABASE AND PANDAS NEEDS POINT 1 AND 2
+-> source /cvmfs/sft.cern.ch/lcg/views/LCG_92python3/x86_64-centos7-gcc7-opt/setup.sh
+python3 IntegratedTP.py
+
+For signal efficiency, bkg and yield with period:
+1. change shell and use one that has not to run the Analysis
+2. source the following cvmfs setup for pyroot and pandas    NB: ALL .py USING THE DATABASE AND PANDAS NEEDS POINT 1 AND 2
+-> source /cvmfs/sft.cern.ch/lcg/views/LCG_92python3/x86_64-centos7-gcc7-opt/setup.sh
+3. Check the input/output folders in the code
+4. run: python3 GetEfficiencies.py (place input() after the Draws to see them as canvas, to esc that mode just click return)
+
+
+
+
+
